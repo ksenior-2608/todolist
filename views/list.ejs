@@ -1,0 +1,28 @@
+<!-- adding header -->
+<%- include("header") -%>
+<!-- title box -->
+<div class="box" id="heading">
+  <h1> <%= listTitle %> </h1>
+</div>
+<!-- list box -->
+<div class="box">
+  <!-- items -->
+  <% items.forEach(function(ele){ %>
+  <!-- making delete request on checkbox toggle -->
+  <form action=<%= listRoute + "delete" %> method="post">
+    <div class="item">
+      <input type="checkbox" name="checkedDataId" value=<%= ele._id %> onchange="this.form.submit()">
+      <!-- sending listTitle to idetify custom list at post request -->
+      <input type="hidden" name="listName" value=<%= listTitle %>>
+      <p><%= ele.name %></p>
+    </div>
+  </form>
+  <% }); %>
+  <!-- new item -->
+  <form class="item" action=<%= listRoute %> method="post">
+    <input type="text" name="nextItem" placeholder="Add your next task" autocomplete="off">
+    <button type="submit" name="button" value=<%= listTitle %>>+</button>
+  </form>
+</div>
+<!-- adding footer -->
+<%- include("footer") -%>
